@@ -34,7 +34,6 @@ router.delete(
   cancelAppointment
 );
 
-
 //admit or accept
 
 router.put(
@@ -60,6 +59,5 @@ router.put(
   ],
   editAdmission
 );
-
 
 module.exports = router;
