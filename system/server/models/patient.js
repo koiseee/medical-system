@@ -31,7 +31,7 @@ const Patient = sequelizeConnect.define(
       allowNull: false,
     },
     phone_number: {
-      type: Sequelize.INTEGER,
+      type: Sequelize.STRING,
       allowNull: false,
     },
     email_address: {
