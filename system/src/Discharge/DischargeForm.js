@@ -1,6 +1,8 @@
 // DischargeForm.js
 import React, { useState } from "react";
 import { useParams, useNavigate } from "react-router-dom";
+import styles from "./DischargeForm.module.css";
+import SuccessModal from "../Admit/SuccessModal";
 
 const DischargeForm = () => {
   const { patientId } = useParams();
@@ -9,6 +11,7 @@ const DischargeForm = () => {
     discharge_by: "",
     reason: "",
   });
+  const [showModal, setShowModal] = useState(false); // State to control the visibility of the modal
   const navigate = useNavigate();
 
   const handleChange = (e) => {
@@ -38,14 +41,20 @@ const DischargeForm = () => {
         throw new Error("Failed to discharge the patient");
       }
 
-      navigate("/submitted-forms");
+      setShowModal(true);
     } catch (error) {
       console.error("Error:", error);
     }
   };
 
+  const closeModal = () => {
+    setShowModal(false);
+    // Redirect to the list of submitted forms
+    navigate("/submitted-forms");
+  };
+
   return (
-    <div>
+    <div className={styles["edit-form-container"]}>
       <h2>Discharge Patient</h2>
       <form onSubmit={handleSubmit}>
         <div>
@@ -80,6 +89,8 @@ const DischargeForm = () => {
         </div>
         <button type="submit">Discharge</button>
       </form>
+      {showModal && <SuccessModal onClose={closeModal} />}{" "}
+      {/* Render the modal */}
     </div>
   );
 };

@@ -1,0 +1,48 @@
+/* AdmitForm.module.css */
+
+.admit-form-container {
+  max-width: 500px;
+  margin: 15vh auto 24vh;
+  padding: 20px;
+  border: 1px solid #ccc;
+  border-radius: 5px;
+  background-color: #ffe5e5; /* Light pink background color */
+  font-family: "Poppins", sans-serif; /* Use Poppins font */
+}
+
+.admit-form-container h2 {
+  text-align: center; /* Center the heading */
+  margin-bottom: 20px;
+}
+
+.admit-form-container form {
+  display: flex;
+  flex-direction: column;
+}
+
+.admit-form-container label {
+  margin-bottom: 5px;
+}
+
+.admit-form-container input[type="date"],
+.admit-form-container input[type="text"] {
+  padding: 10px;
+  margin-bottom: 10px;
+  font-size: 16px;
+  border: 1px solid #ccc;
+  border-radius: 5px;
+}
+
+.admit-form-container button[type="submit"] {
+  background-color: #ff6b6b; /* Light red background color for the submit button */
+  color: #fff;
+  border: none;
+  padding: 10px 20px;
+  font-size: 16px;
+  border-radius: 5px;
+  cursor: pointer;
+}
+
+.admit-form-container button[type="submit"]:hover {
+  background-color: #ff4d4d; /* Darker red color on hover */
+}

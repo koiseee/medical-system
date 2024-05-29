@@ -4,8 +4,11 @@
   align-items: center; /* Center horizontally */
   justify-content: center; /* Center vertically */
   padding: 20px;
-  background-color: #e5f9e5; /* Light green background color */
-  font-family: 'Poppins', sans-serif; /* Use Poppins font */
+  width: 50%;
+  margin-left: 25%;
+  background-color: #f7cece; /* Light green background color */
+  font-family: "Poppins", sans-serif; /* Use Poppins font */
+  border-radius: 20px;
 }
 
 .form-controls input[type="text"],
@@ -16,7 +19,7 @@
   border-radius: 5px;
   font-size: 16px;
   background-color: #fff; /* White background color for inputs */
-  font-family: 'Poppins', sans-serif; /* Use Poppins font */
+  font-family: "Poppins", sans-serif; /* Use Poppins font */
 }
 
 ul {
@@ -30,8 +33,8 @@ li {
   padding: 20px;
   margin-bottom: 20px;
   width: 70%;
-  background-color: #9cf7b7; /* White background color for list items */
-  font-family: 'Poppins', sans-serif; /* Use Poppins font */
+  background-color: #fd928f; /* White background color for list items */
+  font-family: "Poppins", sans-serif; /* Use Poppins font */
 }
 
 li button {
@@ -39,9 +42,9 @@ li button {
   border: none;
   border-radius: 5px;
   cursor: pointer;
-  background-color: #28a745; /* Green background color for buttons */
+  background-color: #f84f4f; /* Green background color for buttons */
   color: #fff;
-  font-family: 'Poppins', sans-serif; /* Use Poppins font */
+  font-family: "Poppins", sans-serif; /* Use Poppins font */
 }
 
 li button:first-child {
@@ -49,5 +52,5 @@ li button:first-child {
 }
 
 li button:hover {
-  background-color: #218838; /* Darker green color on hover */
+  background-color: #b64333; /* Darker green color on hover */
 }

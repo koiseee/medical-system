@@ -1,5 +1,7 @@
 import React, { useState } from "react";
 import { useParams, useNavigate } from "react-router-dom";
+import styles from "./AdmitForm.module.css";
+import SuccessModal from "./SuccessModal"; // Import the SuccessModal component
 
 const AdmitForm = () => {
   const { patientId } = useParams();
@@ -8,6 +10,7 @@ const AdmitForm = () => {
     patient_case: "",
     doctor_incharge: "",
   });
+  const [showModal, setShowModal] = useState(false); // State to control the visibility of the modal
   const navigate = useNavigate();
 
   const handleChange = (e) => {
@@ -34,18 +37,21 @@ const AdmitForm = () => {
         throw new Error("Failed to admit the patient");
       }
 
-      const result = await response.json();
-      console.log(result);
-
-      // Redirect to the list of submitted forms
-      navigate("/submitted-forms");
+      // Show the modal upon successful submission
+      setShowModal(true);
     } catch (error) {
       console.error("Error:", error);
     }
   };
 
+  const closeModal = () => {
+    setShowModal(false);
+    // Redirect to the list of submitted forms
+    navigate("/submitted-forms");
+  };
+
   return (
-    <div>
+    <div className={styles["admit-form-container"]}>
       <h2>Admit Patient</h2>
       <form onSubmit={handleSubmit}>
         <div>
@@ -80,6 +86,8 @@ const AdmitForm = () => {
         </div>
         <button type="submit">Admit</button>
       </form>
+      {showModal && <SuccessModal onClose={closeModal} />}{" "}
+      {/* Render the modal */}
     </div>
   );
 };

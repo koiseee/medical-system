@@ -1,5 +1,7 @@
 import React, { useState, useEffect } from "react";
 import { useParams, useNavigate } from "react-router-dom";
+import styles from "./EditForm.module.css";
+import SuccessModal from "../Admit/SuccessModal";
 
 const EditForm = () => {
   const { patientId } = useParams();
@@ -8,6 +10,7 @@ const EditForm = () => {
     patient_case: "",
     doctor_incharge: "",
   });
+  const [showModal, setShowModal] = useState(false); // State to control the visibility of the modal
   const navigate = useNavigate();
 
   useEffect(() => {
@@ -58,14 +61,20 @@ const EditForm = () => {
       }
 
       // Redirect to the list of submitted forms
-      navigate("/submitted-forms");
+      setShowModal(true);
     } catch (error) {
       console.error("Error:", error);
     }
   };
 
+  const closeModal = () => {
+    setShowModal(false);
+    // Redirect to the list of submitted forms
+    navigate("/submitted-forms");
+  };
+
   return (
-    <div>
+    <div className={styles["edit-form-container"]}>
       <h2>Edit Form</h2>
       <form onSubmit={handleSubmit}>
         <div>
@@ -100,6 +109,8 @@ const EditForm = () => {
         </div>
         <button type="submit">Update</button>
       </form>
+      {showModal && <SuccessModal onClose={closeModal} />}{" "}
+      {/* Render the modal */}
     </div>
   );
 };
