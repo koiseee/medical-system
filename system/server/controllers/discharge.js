@@ -1,3 +1,4 @@
+const { dischargeEmail, transporter } = require("../helpers/emailHelper");
 const Patient = require("../models/patient");
 
 exports.dischargePatient = (req, res, next) => {
@@ -9,7 +10,8 @@ exports.dischargePatient = (req, res, next) => {
       appointment_status: "InProgress",
       status: true,
     },
-  }).then((user) => {
+  })
+    .then((user) => {
       if (!user) {
         return res.status(400).json({
           success: false,
@@ -24,10 +26,18 @@ exports.dischargePatient = (req, res, next) => {
         return user.save();
       }
     })
-    .then(() => {
+    .then((user) => {
+      const mailOptions = dischargeEmail(
+        user.email_address,
+        discharge_date,
+        discharge_by,
+        reason
+      );
+      transporter.sendMail(mailOptions);
       return res.status(200).json({
         success: true,
-        message: "Patient Discharge",
+        message: "Patient admitted successfully",
+        user,
       });
     })
     .catch((error) => {
@@ -35,7 +45,7 @@ exports.dischargePatient = (req, res, next) => {
     });
 };
 
-exports.deleteComplete = (res, req, next) => {
+exports.deleteComplete = (req, res, next) => {
   const { patientId } = req.body;
 
   Patient.findOne({
@@ -47,21 +57,19 @@ exports.deleteComplete = (res, req, next) => {
   })
     .then((user) => {
       if (!user) {
-        return res.status(400).json({
-          success: false,
-          message: "Application does not exist",
-        });
+        return res
+          .status(400)
+          .json({ success: false, message: "Patient not found" });
       } else {
         user.destroy();
       }
     })
     .then(() => {
-      return res.status(200).json({
-        success: true,
-        message: "Application Delete",
-      });
+      return res
+        .status(200)
+        .json({ success: true, message: "Patient Deleted" });
     })
-    .catch((error) => {
-      next(error);
+    .catch((err) => {
+      next(err);
     });
 };

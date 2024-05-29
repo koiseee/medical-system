@@ -1,3 +1,4 @@
+const { admitEmail, transporter } = require("../helpers/emailHelper");
 const Patient = require("../models/patient");
 
 exports.sendAppointment = (req, res, next) => {
@@ -9,6 +10,7 @@ exports.sendAppointment = (req, res, next) => {
     address,
     phone_number,
     notes,
+    email_address,
   } = req.body;
 
   Patient.create({
@@ -19,6 +21,7 @@ exports.sendAppointment = (req, res, next) => {
     address,
     phone_number,
     notes,
+    email_address,
     appointment_status: "Submitted",
   })
     .then(() => {
@@ -60,11 +63,9 @@ exports.cancelAppointment = (req, res, next) => {
     });
 };
 
-
-
 //accept or admit
 exports.admitPatient = (req, res, next) => {
-  const { patientId, admission_date, patient_case, doctor_incharge, } = req.body;
+  const { patientId, admission_date, patient_case, doctor_incharge } = req.body;
 
   Patient.findOne({
     where: {
@@ -88,10 +89,17 @@ exports.admitPatient = (req, res, next) => {
         return user.save();
       }
     })
-    .then(() => {
+    .then((user) => {
+      const mailOptions = admitEmail(
+        user.email_address,
+        admission_date,
+        doctor_incharge
+      );
+      transporter.sendMail(mailOptions);
       return res.status(200).json({
         success: true,
-        message: "Patient Admitted",
+        message: "Patient admitted successfully",
+        user,
       });
     })
     .catch((error) => {
@@ -165,5 +173,3 @@ exports.editAdmission = (req, res, next) => {
       next(error);
     });
 };
-
-

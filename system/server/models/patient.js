@@ -34,6 +34,10 @@ const Patient = sequelizeConnect.define(
       type: Sequelize.INTEGER,
       allowNull: false,
     },
+    email_address: {
+      type: Sequelize.STRING,
+      allowNull: false,
+    },
     notes: {
       type: Sequelize.STRING,
       allowNull: false,

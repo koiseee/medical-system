@@ -86,6 +86,28 @@ const SubmittedForms = () => {
     navigate(`/discharge/${patientId}`);
   };
 
+  const handleDelete = async (id) => {
+    try {
+      const response = await fetch(
+        "http://localhost:3003/api/discharge/delete-complete",
+        {
+          method: "DELETE",
+          headers: {
+            "Content-Type": "application/json",
+          },
+          body: JSON.stringify({ patientId: id }),
+        }
+      );
+      if (!response.ok) {
+        throw new Error("Failed to cancel form");
+      }
+      // Refresh forms after cancelling
+      fetchForms();
+    } catch (error) {
+      console.error("Error:", error);
+    }
+  };
+
   return (
     <div className={styles["submitted-forms-container"]}>
       <h2>Submitted Forms</h2>
@@ -126,6 +148,11 @@ const SubmittedForms = () => {
                 <button onClick={() => handleDischarge(form.id)}>
                   Discharge
                 </button>
+              </div>
+            )}
+            {filterStatus === "Completed" && (
+              <div>
+                <button onClick={() => handleDelete(form.id)}>Delete</button>
               </div>
             )}
           </li>

@@ -1,5 +1,3 @@
-// AppointmentForm.js
-
 import React, { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import styles from "./AppointmentForm.module.css"; // Import CSS module
@@ -12,6 +10,7 @@ const AppointmentForm = () => {
     gender: "",
     address: "",
     phone_number: "",
+    email_address: "",
     notes: "",
   });
 
@@ -47,18 +46,28 @@ const AppointmentForm = () => {
       const result = await response.json();
       console.log(result);
 
+      // Show success alert
+      alert("Application sent successfully!");
+
       // Redirect to the list of submitted forms
       navigate("/submitted-forms");
     } catch (error) {
       console.error("Error:", error);
+
+      // Show error alert
+      alert("Application not sent. Please try again.");
     }
   };
 
   return (
-    <div className={styles["appointment-form-container"]}> {/* Use className from CSS module */}
+    <div className={styles["appointment-form-container"]}>
+      {" "}
+      {/* Use className from CSS module */}
       <h2>Application Form</h2>
       <form onSubmit={handleSubmit}>
-        <div className={styles["form-group"]}> {/* Use className from CSS module */}
+        <div className={styles["form-group"]}>
+          {" "}
+          {/* Use className from CSS module */}
           <label>First Name:</label>
           <input
             type="text"
@@ -68,7 +77,9 @@ const AppointmentForm = () => {
             required
           />
         </div>
-        <div className={styles["form-group"]}> {/* Use className from CSS module */}
+        <div className={styles["form-group"]}>
+          {" "}
+          {/* Use className from CSS module */}
           <label>Last Name:</label>
           <input
             type="text"
@@ -78,7 +89,9 @@ const AppointmentForm = () => {
             required
           />
         </div>
-        <div className={styles["form-group"]}> {/* Use className from CSS module */}
+        <div className={styles["form-group"]}>
+          {" "}
+          {/* Use className from CSS module */}
           <label>Birthday:</label>
           <input
             type="date"
@@ -88,7 +101,9 @@ const AppointmentForm = () => {
             required
           />
         </div>
-        <div className={styles["form-group"]}> {/* Use className from CSS module */}
+        <div className={styles["form-group"]}>
+          {" "}
+          {/* Use className from CSS module */}
           <label>Gender:</label>
           <select
             name="gender"
@@ -101,7 +116,9 @@ const AppointmentForm = () => {
             <option value="Female">Female</option>
           </select>
         </div>
-        <div className={styles["form-group"]}> {/* Use className from CSS module */}
+        <div className={styles["form-group"]}>
+          {" "}
+          {/* Use className from CSS module */}
           <label>Address:</label>
           <input
             type="text"
@@ -111,7 +128,9 @@ const AppointmentForm = () => {
             required
           />
         </div>
-        <div className={styles["form-group"]}> {/* Use className from CSS module */}
+        <div className={styles["form-group"]}>
+          {" "}
+          {/* Use className from CSS module */}
           <label>Phone Number:</label>
           <input
             type="text"
@@ -121,7 +140,21 @@ const AppointmentForm = () => {
             required
           />
         </div>
-        <div className={styles["form-group"]}> {/* Use className from CSS module */}
+        <div className={styles["form-group"]}>
+          {" "}
+          {/* Use className from CSS module */}
+          <label>Email Address:</label>
+          <input
+            type="text"
+            name="email_address"
+            value={formData.email_address}
+            onChange={handleChange}
+            required
+          />
+        </div>
+        <div className={styles["form-group"]}>
+          {" "}
+          {/* Use className from CSS module */}
           <label>Notes:</label>
           <textarea
             name="notes"

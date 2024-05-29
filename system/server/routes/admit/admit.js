@@ -22,6 +22,7 @@ router.post(
     body("gender").notEmpty(),
     body("address").notEmpty(),
     body("phone_number").notEmpty(),
+    body("email_address").notEmpty(),
     body("notes").notEmpty(),
   ],
   validation,

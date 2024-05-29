@@ -110,7 +110,6 @@ exports.findById = (req, res, next) => {
     });
 };
 
-
 exports.findAll = (req, res, next) => {
   Patient.findAll({
     where: {

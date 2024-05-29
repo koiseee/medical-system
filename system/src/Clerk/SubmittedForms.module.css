@@ -1,16 +1,11 @@
-/* SubmittedForms.module.css */
-
 .submitted-forms-container {
   display: flex;
   flex-direction: column;
   align-items: center; /* Center horizontally */
   justify-content: center; /* Center vertically */
   padding: 20px;
-}
-
-.form-controls {
-  display: flex;
-  margin-bottom: 20px;
+  background-color: #e5f9e5; /* Light green background color */
+  font-family: 'Poppins', sans-serif; /* Use Poppins font */
 }
 
 .form-controls input[type="text"],
@@ -20,10 +15,8 @@
   border: 1px solid #ccc;
   border-radius: 5px;
   font-size: 16px;
-}
-
-.form-controls input[type="text"]::placeholder {
-  color: #aaa;
+  background-color: #fff; /* White background color for inputs */
+  font-family: 'Poppins', sans-serif; /* Use Poppins font */
 }
 
 ul {
@@ -37,20 +30,8 @@ li {
   padding: 20px;
   margin-bottom: 20px;
   width: 70%;
-}
-
-li strong {
-  font-size: 18px;
-}
-
-li p {
-  margin: 5px 0;
-}
-
-li .btn-container {
-  display: flex;
-  justify-content: space-between; /* Adjust button spacing */
-  margin-top: 10px; /* Add margin */
+  background-color: #9cf7b7; /* White background color for list items */
+  font-family: 'Poppins', sans-serif; /* Use Poppins font */
 }
 
 li button {
@@ -58,8 +39,9 @@ li button {
   border: none;
   border-radius: 5px;
   cursor: pointer;
-  background-color: #007bff;
+  background-color: #28a745; /* Green background color for buttons */
   color: #fff;
+  font-family: 'Poppins', sans-serif; /* Use Poppins font */
 }
 
 li button:first-child {
@@ -67,5 +49,5 @@ li button:first-child {
 }
 
 li button:hover {
-  background-color: #0056b3;
+  background-color: #218838; /* Darker green color on hover */
 }
