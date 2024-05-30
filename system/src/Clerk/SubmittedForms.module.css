@@ -6,13 +6,20 @@
   padding: 20px;
   width: 50%;
   margin-left: 25%;
-  background-color: #f7cece; /* Light green background color */
+  background-color: #f7cece; /* Light pink background color */
   font-family: "Poppins", sans-serif; /* Use Poppins font */
   border-radius: 20px;
 }
 
-.form-controls input[type="text"],
-.form-controls select {
+.form-controls {
+  display: flex;
+  justify-content: space-between;
+  margin-bottom: 20px;
+  width: 100%;
+}
+
+.search-input,
+.filter-select {
   padding: 10px;
   margin-right: 10px;
   border: 1px solid #ccc;
@@ -22,35 +29,93 @@
   font-family: "Poppins", sans-serif; /* Use Poppins font */
 }
 
-ul {
-  list-style-type: none;
+.forms-list {
+  list-style: none;
   padding: 0;
+  width: 100%;
 }
 
-li {
+.form-item {
   border: 1px solid #ccc;
   border-radius: 10px;
   padding: 20px;
   margin-bottom: 20px;
-  width: 70%;
-  background-color: #fd928f; /* White background color for list items */
+  background-color: #fd928f; /* Light red background color for list items */
   font-family: "Poppins", sans-serif; /* Use Poppins font */
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
 }
 
-li button {
+.form-details {
+  flex: 1;
+}
+
+.form-details p {
+  margin: 5px 0;
+}
+
+.form-actions {
+  display: flex;
+  gap: 10px;
+}
+
+.action-button {
   padding: 6px 12px; /* Adjust padding */
   border: none;
   border-radius: 5px;
   cursor: pointer;
-  background-color: #f84f4f; /* Green background color for buttons */
+  background-color: #f84f4f; /* Red background color for buttons */
   color: #fff;
   font-family: "Poppins", sans-serif; /* Use Poppins font */
 }
 
-li button:first-child {
-  margin-right: 10px; /* Add margin between buttons */
+.action-button:hover {
+  background-color: #b64333; /* Darker red color on hover */
 }
 
-li button:hover {
-  background-color: #b64333; /* Darker green color on hover */
+.empty-message {
+  text-align: center;
+  color: #777;
+  font-size: 18px;
+}
+
+.modal {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  right: auto;
+  bottom: auto;
+  transform: translate(-50%, -50%);
+  background-color: #fff;
+  padding: 20px;
+  border-radius: 10px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+  width: 50%;
+  max-width: 500px;
+  font-family: "Poppins", sans-serif; /* Use Poppins font */
+}
+
+.overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background-color: rgba(0, 0, 0, 0.5);
+}
+
+.close-button {
+  padding: 6px 12px;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+  background-color: #f84f4f; /* Red background color for buttons */
+  color: #fff;
+  font-family: "Poppins", sans-serif; /* Use Poppins font */
+  margin-top: 20px;
+}
+
+.close-button:hover {
+  background-color: #b64333; /* Darker red color on hover */
 }

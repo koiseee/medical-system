@@ -1,13 +1,16 @@
-// SubmittedForms.js
-
 import React, { useState, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
+import Modal from 'react-modal';
 import styles from "./SubmittedForms.module.css"; // Import CSS module
+
+Modal.setAppElement('#root'); // Bind modal to the root element
 
 const SubmittedForms = () => {
   const [forms, setForms] = useState([]);
   const [searchQuery, setSearchQuery] = useState("");
   const [filterStatus, setFilterStatus] = useState("");
+  const [selectedForm, setSelectedForm] = useState(null);
+  const [isModalOpen, setIsModalOpen] = useState(false);
   const navigate = useNavigate();
 
   useEffect(() => {
@@ -99,13 +102,23 @@ const SubmittedForms = () => {
         }
       );
       if (!response.ok) {
-        throw new Error("Failed to cancel form");
+        throw new Error("Failed to delete form");
       }
-      // Refresh forms after cancelling
+      // Refresh forms after deleting
       fetchForms();
     } catch (error) {
       console.error("Error:", error);
     }
+  };
+
+  const handleView = (form) => {
+    setSelectedForm(form);
+    setIsModalOpen(true);
+  };
+
+  const closeModal = () => {
+    setIsModalOpen(false);
+    setSelectedForm(null);
   };
 
   return (
@@ -117,47 +130,70 @@ const SubmittedForms = () => {
           placeholder="Search"
           value={searchQuery}
           onChange={handleSearch}
+          className={styles["search-input"]}
         />
-        <select value={filterStatus} onChange={handleFilterChange}>
+        <select value={filterStatus} onChange={handleFilterChange} className={styles["filter-select"]}>
           <option value="">All</option>
           <option value="Submitted">Submitted</option>
           <option value="InProgress">InProgress</option>
           <option value="Completed">Completed</option>
         </select>
       </div>
-      <ul>
-        {filteredForms.map((form) => (
-          <li key={form.id}>
-            <strong>
-              Name: {form.firstname} {form.lastname}
-            </strong>
-            <p>Birthday: {form.birthday}</p>
-            <p>Gender: {form.gender}</p>
-            <p>Address: {form.address}</p>
-            <p>Phone Number: {form.phone_number}</p>
-            <p>Notes: {form.notes}</p>
-            {filterStatus === "Submitted" && (
-              <div>
-                <button onClick={() => handleAdmit(form.id)}>Admit</button>
-                <button onClick={() => handleCancel(form.id)}>Cancel</button>
+      {filteredForms.length === 0 ? (
+        <p className={styles["empty-message"]}>Empty</p>
+      ) : (
+        <ul className={styles["forms-list"]}>
+          {filteredForms.map((form) => (
+            <li key={form.id} className={styles["form-item"]}>
+              <div className={styles["form-details"]}>
+                <strong>
+                  Name: {form.firstname} {form.lastname}
+                </strong>
               </div>
-            )}
-            {filterStatus === "InProgress" && (
-              <div>
-                <button onClick={() => handleEdit(form.id)}>Edit</button>
-                <button onClick={() => handleDischarge(form.id)}>
-                  Discharge
-                </button>
+              <div className={styles["form-actions"]}>
+                <button onClick={() => handleView(form)} className={styles["action-button"]}>View</button>
+                {filterStatus === "Submitted" && (
+                  <div>
+                    <button onClick={() => handleAdmit(form.id)} className={styles["action-button"]}>Admit</button>
+                    <button onClick={() => handleCancel(form.id)} className={styles["action-button"]}>Cancel</button>
+                  </div>
+                )}
+                {filterStatus === "InProgress" && (
+                  <div>
+                    <button onClick={() => handleEdit(form.id)} className={styles["action-button"]}>Edit</button>
+                    <button onClick={() => handleDischarge(form.id)} className={styles["action-button"]}>Discharge</button>
+                  </div>
+                )}
+                {filterStatus === "Completed" && (
+                  <div>
+                    <button onClick={() => handleDelete(form.id)} className={styles["action-button"]}>Delete</button>
+                  </div>
+                )}
               </div>
-            )}
-            {filterStatus === "Completed" && (
-              <div>
-                <button onClick={() => handleDelete(form.id)}>Delete</button>
-              </div>
-            )}
-          </li>
-        ))}
-      </ul>
+            </li>
+          ))}
+        </ul>
+      )}
+      <Modal
+        isOpen={isModalOpen}
+        onRequestClose={closeModal}
+        contentLabel="Form Details"
+        className={styles["modal"]}
+        overlayClassName={styles["overlay"]}
+      >
+        {selectedForm && (
+          <div>
+            <h2>Form Details</h2>
+            <p><strong>Name:</strong> {selectedForm.firstname} {selectedForm.lastname}</p>
+            <p><strong>Birthday:</strong> {selectedForm.birthday}</p>
+            <p><strong>Gender:</strong> {selectedForm.gender}</p>
+            <p><strong>Address:</strong> {selectedForm.address}</p>
+            <p><strong>Phone Number:</strong> {selectedForm.phone_number}</p>
+            <p><strong>Notes:</strong> {selectedForm.notes}</p>
+            <button onClick={closeModal} className={styles["close-button"]}>Close</button>
+          </div>
+        )}
+      </Modal>
     </div>
   );
 };

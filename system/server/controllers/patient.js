@@ -8,7 +8,7 @@ exports.findAllSubmitForm = (req, res, next) => {
     },
   })
     .then((user) => {
-      if (user.length === 0) {
+      if (!user) {  
         return res.status(400).json({
           status: false,
           message: "There's no available",
@@ -35,7 +35,7 @@ exports.findAllInProgress = (req, res, next) => {
     },
   })
     .then((user) => {
-      if (user.length === 0) {
+      if (!user) {
         return res.status(400).json({
           status: false,
           message: "There's no available",
@@ -62,7 +62,7 @@ exports.findAllCompleted = (req, res, next) => {
     },
   })
     .then((user) => {
-      if (user.length === 0) {
+      if (!user) {
         return res.status(400).json({
           status: false,
           message: "There's no available",

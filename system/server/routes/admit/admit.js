@@ -21,7 +21,7 @@ router.post(
     body("birthday").notEmpty(),
     body("gender").notEmpty(),
     body("address").notEmpty(),
-    body("phone_number").notEmpty(),
+    body("phone_number").trim().isLength({ max: 11 }).not().isEmpty(),
     body("email_address").notEmpty(),
     body("notes").notEmpty(),
   ],

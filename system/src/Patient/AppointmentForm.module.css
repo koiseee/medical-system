@@ -4,12 +4,29 @@ body {
     #fad1d1,
     #fa2f2f
   ); /* Pink gradient background */
+  background-size: cover; /* Ensure the gradient covers the entire body */
+  background-repeat: no-repeat; /* Prevent the gradient from repeating */
+  margin: 0; /* Remove default margin */
+  min-height: 100vh; /* Ensure the body covers the full height of the viewport */
+  font-family: "Poppins", sans-serif; /* Use Poppins font for the entire body */
 }
 
 .appointment-form-container {
   max-width: 500px;
   margin: 0 auto;
   padding: 20px;
+  body {
+    background: linear-gradient(
+      135deg,
+      #fad1d1,
+      #fa2f2f
+    ); /* Pink gradient background */
+    background-size: cover; /* Ensure the gradient covers the entire body */
+    background-repeat: no-repeat; /* Prevent the gradient from repeating */
+    margin: 0; /* Remove default margin */
+    min-height: 100vh; /* Ensure the body covers the full height of the viewport */
+    font-family: "Poppins", sans-serif; /* Use Poppins font for the entire body */
+  }
   border: 1px solid #ccc;
   border-radius: 5px;
   background-color: #f8bfbf; /* Light pink background color */
